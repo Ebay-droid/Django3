@@ -1,7 +1,7 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
-
+from django.core.validators import MinValueValidator,MaxValueValidator
 # Create your models here.
 
 class Project(models.Model):
@@ -17,3 +17,8 @@ class  Profile(models.Model):
   phone_number = models.IntegerField()
   project = models.ForeignKey(Project,on_delete=models.CASCADE)
   user = models.ForeignKey(User,on_delete=models.CASCADE,default='')
+  
+class Rating(models.Model):
+  user =models.ForeignKey(User,on_delete=models.CASCADE,default='')
+  project = models.ForeignKey(Project,on_delete=models.CASCADE,default='')  
+  rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
