@@ -16,6 +16,12 @@ class  Profile(models.Model):
   user = models.ForeignKey(User,on_delete=models.CASCADE,default='')
   
   
+  def __str__(self):
+    return self.user.username
+  
+  def save_profile(self):
+    self.save()
+  
  
 class Project(models.Model):
   title =models.CharField(max_length=50)
@@ -25,8 +31,14 @@ class Project(models.Model):
   user =models.ForeignKey(User,on_delete=models.CASCADE,default='',null=True)
   profile = models.ForeignKey(Profile,on_delete=models.CASCADE,default='')
   
+  def save_project(self):
+    self.save()
+    
+  def delete_project(self):
+    self.delete()  
   
-  
+  def __str__(self):
+      return self.title 
   
 class Rating(models.Model):
   profile =models.ForeignKey(Profile,on_delete=models.CASCADE,default='')

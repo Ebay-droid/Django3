@@ -32,18 +32,17 @@ def project(request):
 def project_detail(request,project_id):
   user = request.user
   project = get_object_or_404(Project, id=project_id)
-  profile = Profile.objects.get(Profile,user=user)
   
 
 
   
-  return render (request, 'project_detail.html',{'project':project, 'user':user,'profile':profile})
+  return render (request, 'project_detail.html',{'project':project, 'user':user})
 
 @login_required
 def rating(request,project_id):
   user = request.user
   project = get_object_or_404(Project, id=project_id)
-  profile = Profile.objects.get(Profile,user=user)
+  profile = Profile.objects.get(user=request.user)
 
   if request.method == 'POST':
       form = RatingForm(request.POST)
@@ -52,10 +51,10 @@ def rating(request,project_id):
         rating.project = project
         rating.profile = profile
         rating.save()
-      return redirect('project_detail')  
+      return HttpResponseRedirect(reverse('rating', args=[project_id]))  
   else:
     form = RatingForm()
-  return render(request, 'rate.html'{'form':form})  
+  return render(request, 'rate.html',{'form':form,'user':user})  
     
     
     
