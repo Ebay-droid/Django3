@@ -23,7 +23,7 @@ def project(request):
   project = Project.objects.all()
   
   
-  return render (request,'projects.html',{'project':project})
+  return render (request,'project.html',{'project':project})
 
 @login_required
 def project_detail(request,project_id):
@@ -39,7 +39,14 @@ def new_project(request):
     form = ProjectForm(request.POST, request.FILES)
     if form.is_valid():
       project =form.save(commit=False)
-      project.profile
+      project.profile = user
+      project.user = request.user
+      project.save()
+    return redirect('project')  
+  else:
+    form = ProjectForm()
+  return render (request, 'newproject.html',{'form':form})  
+  
   
   
   
