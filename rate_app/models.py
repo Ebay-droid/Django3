@@ -9,7 +9,7 @@ class Project(models.Model):
   image = CloudinaryField('image')
   description = models.TextField()
   project_link = models.URLField(default='')
-  
+  user =models.ForeignKey(User,on_delete=models.CASCADE,default='',null=True)
 class  Profile(models.Model):
   profile_pic = CloudinaryField('image')
   Bio = models.TextField()

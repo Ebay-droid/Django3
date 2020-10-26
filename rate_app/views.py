@@ -13,6 +13,15 @@ def index(request):
 def profile(request):
   return render(request,'profile.html')
 
+def project(request):
+  return render (request,'projects.html')
+
+def project_detail(request):
+  return render (request, 'project_detail.html')
+
+def new_project(request):
+  return render (request,'')
+
 class ProfileList(APIView):
   def get(self, request, format=None):
     profiles = Profile.objects.all()
@@ -37,4 +46,5 @@ class ProjectList(APIView):
     serializers=ProjectSerializer(data=request.data)
     if serializers.is_valid():
       serializers.save()
-      return Response  
+      return Response(serializers.data,status=status.HTTP_201_CREATED)
+    return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)  
