@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import *
+from .forms import *
 from .serializer import *
 from rest_framework import status
 from django.contrib.auth.decorators import login_required
@@ -24,13 +25,27 @@ def project(request):
   
   return render (request,'projects.html',{'project':project})
 
+@login_required
 def project_detail(request,project_id):
-  project = Project.objects.get(id=project_id)
+  project = get_object_or_404(Project, id=project_id)
   
   
   return render (request, 'project_detail.html',{'project':project})
 
+@login_required
 def new_project(request):
+  user = Profile.objects.get(user=request.user)
+  if  request.method == 'POST':
+    form = ProjectForm(request.POST, request.FILES)
+    if form.is_valid():
+      project =form.save(commit=False)
+      project.profile
+  
+  
+  
+  
+  
+  
   
   return render (request,'')
 
