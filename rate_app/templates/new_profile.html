@@ -1,0 +1,14 @@
+{%include ''base.html'%}
+{%load bootstrap4%}
+
+{%block content%}
+  <form action="{%url 'new_profile'%}">
+    {%csrf_token%}
+
+    {%bootstrap_form form%}
+
+    <input type="submit" class="btn btn-success btn-lg" value="Post">
+
+  </form>
+
+{%endblock%}

@@ -47,14 +47,24 @@ def new_project(request):
     form = ProjectForm()
   return render (request, 'newproject.html',{'form':form})  
   
+@login_required
+def update_profile(request, username):
+  user = get_object_or_404(request,username)  
+  new_user = request.user
+  if request.method == 'POST':
+    
+    form = ProfileForm(request.POST, request.FILES)
+    if form.is_valid():
+      profile = form.save(commit=False)
+      profile.user = new_user
+      profile.save()
+      
+      return redirect('profile')
+    else:
+      form = ProfileForm()
+      
+    return render(request, 'new_profile.html',{'user':user,'form':form})   
   
-  
-  
-  
-  
-  
-  
-  return render (request,'')
 
 class ProfileList(APIView):
   def get(self, request, format=None):
