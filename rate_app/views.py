@@ -14,16 +14,24 @@ def index(request):
 def profile(request,username):
   user = get_object_or_404(User,username=username)
   profile = Profile.objects.get(username=username)
-  return render(request,'profile.html')
-
-def project(request):
   
-  return render (request,'projects.html')
+  return render(request,'profile.html',{'user':user, 'profile':profile})
 
-def project_detail(request):
-  return render (request, 'project_detail.html')
+@login_required
+def project(request):
+  project = Project.objects.all()
+  
+  
+  return render (request,'projects.html',{'project':project})
+
+def project_detail(request,project_id):
+  project = Project.objects.get(id=project_id)
+  
+  
+  return render (request, 'project_detail.html',{'project':project})
 
 def new_project(request):
+  
   return render (request,'')
 
 class ProfileList(APIView):

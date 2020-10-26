@@ -1,0 +1,33 @@
+{%include 'base.html'%}
+{%load bootstrap4%}
+{%block content%}
+<div class="container">
+  <div class="card">
+    <div class="row">
+      {%for item in project%}
+      <!-- Card -->
+        <div class="card">
+
+          <!-- Card image -->
+          <img class="card-img-top" src="{{item.image.url}}" alt="Card image cap">
+
+          <!-- Card content -->
+          <div class="card-body">
+
+            <!-- Title -->
+            <h4 class="card-title"><a>{{item.title}}</a></h4>
+            <!-- Text -->
+            <p class="card-text">{{item.description}}</p>
+            <!-- Button -->
+            <a href="#" class="btn btn-primary">Button</a>
+
+          </div>
+
+        </div>
+        <!-- Card -->
+      {%endfor%}
+    </div>
+  </div>
+</div>
+
+{%endblock%}
