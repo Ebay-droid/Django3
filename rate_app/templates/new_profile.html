@@ -1,14 +1,50 @@
-{%include ''base.html'%}
+{%include 'base.html'%}
 {%load bootstrap4%}
 
 {%block content%}
-  <form action="{%url 'new_profile'%}">
+  <form action="" method ="POST" enctype="multipart/form-data">
+
     {%csrf_token%}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="">
+            {%bootstrap_form form %}
 
-    {%bootstrap_form form%}
+            <button type="submit" class="btn btn-outline-black btn-lg">Post</button>
 
-    <input type="submit" class="btn btn-success btn-lg" value="Post">
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+    
+
 
   </form>
+<!-- 
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+        <div class="col-md-6">
+              <div class="title">Create a profile and be Inspired</div>
+              <hr>
+              <div class="guide">Please provide an image for your profile picture, a short description of yourself and/or what you do (bio), your location, email address and a link to your portfolio.</div>
+              <form action="" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                {% bootstrap_form form%}
+                <input type="submit" class="btn blue-gradient" value="Create Profile">
+            </form>
+          </div>
+
+          <div class="col-md-3"></div>
+
+        </div>
+          
+         
+      
+    </div> -->
+   
 
 {%endblock%}

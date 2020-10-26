@@ -12,14 +12,10 @@ class  Profile(models.Model):
   profile_pic = CloudinaryField('image')
   Bio = models.TextField()
   email = models.EmailField()
-  phone_number = models.IntegerField()
+  phone_number = models.IntegerField(null=True)
   user = models.ForeignKey(User,on_delete=models.CASCADE,default='')
   
-@receiver(post_save, sender=User)
-def update_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-    instance.profile.save()  
+  
  
 class Project(models.Model):
   title =models.CharField(max_length=50)
@@ -29,7 +25,13 @@ class Project(models.Model):
   user =models.ForeignKey(User,on_delete=models.CASCADE,default='',null=True)
   profile = models.ForeignKey(Profile,on_delete=models.CASCADE,default='')
   
+  
+  
+  
 class Rating(models.Model):
-  user =models.ForeignKey(User,on_delete=models.CASCADE,default='')
+  profile =models.ForeignKey(Profile,on_delete=models.CASCADE,default='')
   project = models.ForeignKey(Project,on_delete=models.CASCADE,default='')  
-  rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+  design = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+  usability = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+  content = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
+  

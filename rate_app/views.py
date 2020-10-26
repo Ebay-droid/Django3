@@ -6,6 +6,9 @@ from .forms import *
 from .serializer import *
 from rest_framework import status
 from django.contrib.auth.decorators import login_required
+from django.urls import  reverse
+from django.http import HttpResponse,HttpResponseRedirect
+
 
 # Create your views here.
 def index(request):
@@ -14,7 +17,7 @@ def index(request):
 @login_required
 def profile(request,username):
   user = get_object_or_404(User,username=username)
-  profile = Profile.objects.get(username=username)
+  profile = Profile.objects.get(user=user)
   
   return render(request,'profile.html',{'user':user, 'profile':profile})
 
@@ -27,19 +30,47 @@ def project(request):
 
 @login_required
 def project_detail(request,project_id):
+  user = request.user
   project = get_object_or_404(Project, id=project_id)
+  profile = Profile.objects.get(Profile,user=user)
   
+
+
   
-  return render (request, 'project_detail.html',{'project':project})
+  return render (request, 'project_detail.html',{'project':project, 'user':user,'profile':profile})
+
+@login_required
+def rating(request,project_id):
+  user = request.user
+  project = get_object_or_404(Project, id=project_id)
+  profile = Profile.objects.get(Profile,user=user)
+
+  if request.method == 'POST':
+      form = RatingForm(request.POST)
+      if form.is_valid():
+        rating = form.save(commit=False)
+        rating.project = project
+        rating.profile = profile
+        rating.save()
+      return redirect('project_detail')  
+  else:
+    form = RatingForm()
+  return render(request, 'rate.html'{'form':form})  
+    
+    
+    
+      
 
 @login_required
 def new_project(request):
-  user = Profile.objects.get(user=request.user)
+  user = request.user
+  profile = Profile.objects.get(user=request.user)
+  
   if  request.method == 'POST':
     form = ProjectForm(request.POST, request.FILES)
     if form.is_valid():
       project =form.save(commit=False)
-      project.profile = user
+      project.profile = profile
       project.user = request.user
       project.save()
     return redirect('project')  
@@ -49,7 +80,7 @@ def new_project(request):
   
 @login_required
 def update_profile(request, username):
-  user = get_object_or_404(request,username)  
+  user = get_object_or_404(User,username=username)  
   new_user = request.user
   if request.method == 'POST':
     
@@ -59,11 +90,11 @@ def update_profile(request, username):
       profile.user = new_user
       profile.save()
       
-      return redirect('profile')
+      return HttpResponseRedirect(reverse('profile', args=[username]))
     else:
       form = ProfileForm()
-      
-    return render(request, 'new_profile.html',{'user':user,'form':form})   
+    
+  return render(request, 'new_profile.html',{'user':user,'form':ProfileForm})   
   
 
 class ProfileList(APIView):

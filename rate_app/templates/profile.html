@@ -8,17 +8,17 @@
 
   <!-- Avatar -->
   <div class="avatar mx-auto white">
-    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%2810%29.jpg" class="rounded-circle"
+    <img src="{{profile.profile_pic.url}}" class="rounded-circle img-fluid img-responsive img-thumbnail"
       alt="woman avatar">
   </div>
 
   <!-- Content -->
   <div class="card-body">
     <!-- Name -->
-    <h4 class="card-title">Anna Doe</h4>
+    <h4 class="card-title">{{user.username}}</h4>
     <hr>
     <!-- Quotation -->
-    <p><i class="fas fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, adipisci
+    <p><i class="fas fa-quote-left"></i> {{profile.Bio}}
     </p>
   </div>
 
