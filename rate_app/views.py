@@ -102,7 +102,18 @@ def update_profile(request, username):
       form = ProfileForm()
     
   return render(request, 'new_profile.html',{'user':user,'form':ProfileForm})   
-  
+
+@login_required
+def search_project(request):
+  if 'project' in request.GET and request.GET["project"]:
+    search_term = request.GET.get('project')
+    searched_projects = Project.search_title(search_term)
+    message = f"{search_term}"
+    
+    return render (request, 'search.html',{"message":message, "projects":searched_projects})
+  else:
+    message = "Have you searched for any term?"
+    return render (request,'search.html',{"message":message})  
 
 class ProfileList(APIView):
   def get(self, request, format=None):
