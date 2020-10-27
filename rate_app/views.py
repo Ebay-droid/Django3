@@ -32,7 +32,7 @@ def project(request):
 def project_detail(request,project_id):
   user = request.user
   project = get_object_or_404(Project, id=project_id)
-  reviews = Review.objects.filter(project=project).order_by('date')
+  reviews = Review.objects.filter(project=project)
   
   if request.method == 'POST':
     form = ReviewForm(request.POST)
