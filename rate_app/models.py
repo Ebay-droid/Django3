@@ -48,7 +48,7 @@ class Rating(models.Model):
   content = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
   
   
-class  Comment(models.Model):
-     project = models.ForeignKey(Project,on_delete=models.CASCADE,default ='')
-     user = models.ForeignKey(User,on_delete=models.CASCADE,default ='')
-     comment = models.TextField()  
+class  Review(models.Model):
+  project = models.ForeignKey(Project,on_delete=models.CASCADE,default ='')
+  user = models.ForeignKey(User,on_delete=models.CASCADE,default ='')
+  review = models.TextField()  

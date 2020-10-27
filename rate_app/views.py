@@ -32,7 +32,18 @@ def project(request):
 def project_detail(request,project_id):
   user = request.user
   project = get_object_or_404(Project, id=project_id)
+  reviews = Review.objects.filter(project=project).order_by('date')
   
+  if request.method == 'POST':
+    form = CommentForm(request.POST)
+    if form.is_valid():
+      comment = form.save(commit=False)
+      comment.post= post
+      comment.user = user 
+      comment.save()
+      return HttpResponseRedirect(reverse('post_details', args=[post_id]))       
+  else:
+    form = CommentForm()
 
 
   
