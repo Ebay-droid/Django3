@@ -1,5 +1,6 @@
 {%include 'base.html'%}
 {%block content%}
+{%load static%}
 <!-- Card -->
 <div class="card testimonial-card">
 
@@ -8,7 +9,7 @@
 
   <!-- Avatar -->
   <div class="avatar mx-auto white">
-    <img src="{{profile.profile_pic.url}}" class="rounded-circle img-fluid img-responsive img-thumbnail"
+    <img src="{{profile.profile_pic.url}}" class="rounded-circle img-fluid  profile-image"
       alt="woman avatar">
   </div>
 
