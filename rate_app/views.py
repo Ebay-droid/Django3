@@ -8,7 +8,7 @@ from rest_framework import status
 from django.contrib.auth.decorators import login_required
 from django.urls import  reverse
 from django.http import HttpResponse,HttpResponseRedirect
-
+from django.db.models import  Avg
 
 # Create your views here.
 def index(request):
@@ -34,10 +34,15 @@ def project_detail(request,project_id):
   project = get_object_or_404(Project, id=project_id)
   reviews = Review.objects.filter(project=project)
   
-  
+  average_design = reviews.aggregate(Avg('design'))["design__avg"]
+  average_usability = reviews.aggregate(Avg('usability'))["usability__avg"]
+  average_content = reviews.aggregate(Avg('content'))["content__avg"]
+  average_design = round(average_design, 2)
+  average_usability = round(average_usability,2)
+  average_content = round(average_content,2)
 
   
-  return render (request, 'project_detail.html',{'project':project, 'user':user, 'reviews':reviews})
+  return render (request, 'project_detail.html',{'project':project, 'user':user, 'reviews':reviews,'average_design':average_design,'average_usability':average_usability,'average_content':average_content})
 
 
 @login_required
@@ -56,7 +61,7 @@ def new_review(request,project_id):
         return HttpResponseRedirect(reverse('project_detail', args=[project_id]))
   else:
     form = ReviewForm()
-  return render(request,'project_detail.html',{'form':form, 'reviews':review,'project':project, 'user':user})  
+  return render(request,'project_detail.html',{'form':ReviewForm, 'reviews':review,'project':project, 'user':user})  
       
       
     

@@ -39,13 +39,13 @@
                 <textarea name="comment" id="comment" class="form-control" cols="30" rows="5"></textarea>
 
                 <label for="design">Design</label>
-                <input type="text" class="form-control" >
+                <input type="text" min="0" max="10" class="form-control" >
 
                 <label for="usability">Usability</label>
-                <input type="text" class="form-control" >
+                <input type="text" min="0" max="10" class="form-control" >
 
                 <label for="content">Content</label>
-                <input type="text" class="form-control" >
+                <input type="text" min="0" max="10" class="form-control" >
         
                 <button name="action" type="submit" class="btn btn-outline-default">Post</button>
               </div>
@@ -58,20 +58,30 @@
         </div>
       
       </div>
+      <div class="card">
+        {% for review in reviews%}
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <h5 class="text-left">{{review.user.username}}</h5>
+                  <h5>Design:{{review.design}}</h5>
+                  <h5>Usability: {{review.usability}}</h5>
+                  <h5>Content:{{review.content}}</h5>
+                </div>
+
+                <div class="col-md-9">
+                  <p>{{review.review}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+        
+        {%endfor%}
+      </div>
     </div>
-    <div class="col-md-3">
-      {% for review in reviews%}
-  <div class="media d-block d-md-flex mt-3">
-    <a class="d-flex pr-3" href="#">
-      <img class="d-flex mr-3 img-fluid rounded-circle  profile-image" src="{{review.user.profile.profile_pic.url}}" alt="Generic placeholder image">
-    </a>
-    <div class="media-body text-md-left">
-      <h5 class="mt-0 font-weight-bold card-text">{{review.user}}</h5>
-      <p>{{review.review}}</p>
-    </div>
-  </div>
-  {%endfor%}
-    </div>
+    <div class="col-md-3"> </div>
   </div>
 </div>
 
