@@ -2,33 +2,42 @@
 
 {%block content%}
 <!-- Card -->
-<div class="card card-cascade wider reverse">
+<div class="container">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="card card-cascade wider reverse">
 
-  <!-- Card image -->
-  <div class="view view-cascade overlay">
-    <img class="card-img-top" src="{{ project.image.url}}"
-      alt="Card image cap">
-    <a href="#!">
-      <div class="mask rgba-white-slight"></div>
-    </a>
+        <!-- Card image -->
+        <div class="view view-cascade overlay">
+          <img class="card-img-top" src="{{ project.image.url}}"
+            alt="Card image cap">
+          <a href="#!">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>
+      
+        <!-- Card content -->
+        <div class="card-body card-body-cascade text-center">
+      
+          <!-- Title -->
+          <h4 class="card-title"><strong>{{project.title}}</strong></h4>
+          <!-- Subtitle -->
+          <a href="{{project.project_link}}"><h6 class="font-weight-bold indigo-text py-2">Project Link: {{project.project_link}}</h6></a> 
+          <!-- Text -->
+          <p class="card-text">Description: {{project.description}} </p>
+      
+          <a href="{%url 'rating' project.id%}"><button class="btn btn-purple" >Rate</button></a>
+      
+        
+      
+        </div>
+      
+      </div>
+    </div>
+    <div class="col-md-3"></div>
   </div>
-
-  <!-- Card content -->
-  <div class="card-body card-body-cascade text-center">
-
-    <!-- Title -->
-    <h4 class="card-title"><strong>{{project.title}}</strong></h4>
-    <!-- Subtitle -->
-    <a href="{{project.project_link}}"><h6 class="font-weight-bold indigo-text py-2">Project Link: {{project.project_link}}</h6></a> 
-    <!-- Text -->
-    <p class="card-text">Description: {{project.description}} </p>
-
-    <a href="{%url 'rating' project.id%}"><button class="btn btn-purple" data-toggle="modal" data-target="#modalAbandonedCart">Rate</button></a>
-
-  
-
-  </div>
-
 </div>
+
 <!-- Card -->
 {%endblock%}
