@@ -40,15 +40,15 @@ class Project(models.Model):
   def __str__(self):
       return self.title 
   
-class Rating(models.Model):
-  profile =models.ForeignKey(Profile,on_delete=models.CASCADE,default='')
-  project = models.ForeignKey(Project,on_delete=models.CASCADE,default='')  
-  design = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
-  usability = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
-  content = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
-  
+
   
 class  Review(models.Model):
-  project = models.ForeignKey(Project,on_delete=models.CASCADE,default ='')
-  user = models.ForeignKey(User,on_delete=models.CASCADE,default ='')
+  project = models.ForeignKey(Project,on_delete=models.CASCADE,)
+  user = models.ForeignKey(User,on_delete=models.CASCADE)
   review = models.TextField()  
+  design = models.FloatField(default=0)
+  usability = models.FloatField(default=0)
+  content = models.FloatField(default=0)
+  
+  def __str__(self):
+    return self.user.username

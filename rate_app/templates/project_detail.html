@@ -27,15 +27,25 @@
           <!-- Text -->
           <p class="card-text">Description: {{project.description}} </p>
       
-          <a href="{%url 'rating' project.id%}"><button class="btn btn-purple" >Rate</button></a>
 
           <!-- review -->
+          <h4>Rate this Project</h4>
           <div class="media-body text-center text-md-left ml-md-3 ml-0">
             <h5 class="mt-0 font-weight-bold blue-text mb-3">{{review.user}}</h5>
-            <form method="post" role="form" action="">
+            <form method="POST" role="form" action="{% url 'review' project.id %}">
               {%csrf_token%}
               <div>
-                {% bootstrap_form review_form%}
+                <label for="comment">Review</label>
+                <textarea name="comment" id="comment" class="form-control" cols="30" rows="5"></textarea>
+
+                <label for="design">Design</label>
+                <input type="text" class="form-control" >
+
+                <label for="usability">Usability</label>
+                <input type="text" class="form-control" >
+
+                <label for="content">Content</label>
+                <input type="text" class="form-control" >
         
                 <button name="action" type="submit" class="btn btn-outline-default">Post</button>
               </div>
@@ -53,7 +63,7 @@
       {% for review in reviews%}
   <div class="media d-block d-md-flex mt-3">
     <a class="d-flex pr-3" href="#">
-      <img class="d-flex mr-3 img-fluid rounded-circle  profile-image" src="{{review.project.profile.profile_pic.url}}" alt="Generic placeholder image">
+      <img class="d-flex mr-3 img-fluid rounded-circle  profile-image" src="{{review.user.profile.profile_pic.url}}" alt="Generic placeholder image">
     </a>
     <div class="media-body text-md-left">
       <h5 class="mt-0 font-weight-bold card-text">{{review.user}}</h5>

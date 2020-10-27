@@ -12,10 +12,10 @@ class ProfileForm(forms.ModelForm):
     model = Profile
     exclude = ['user']    
     
-class RatingForm(forms.ModelForm):
-  class Meta:
-    model = Rating
-    exclude = ['profile','project']
+# class RatingForm(forms.ModelForm):
+#   class Meta:
+#     model = Rating
+#     exclude = ['profile','project']
     
 class ReviewForm(forms.ModelForm):
   class Meta:
