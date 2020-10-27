@@ -37,17 +37,17 @@ def project_detail(request,project_id):
   if request.method == 'POST':
     form = ReviewForm(request.POST)
     if form.is_valid():
-      comment = form.save(commit=False)
-      comment.post= post
-      comment.user = user 
-      comment.save()
+      review = form.save(commit=False)
+      review.project= project
+      review.user = user 
+      review.save()
       return HttpResponseRedirect(reverse('project_detail', args=[project_id]))       
   else:
     form = ReviewForm()
 
 
   
-  return render (request, 'project_detail.html',{'project':project, 'user':user, 'reviews':reviews})
+  return render (request, 'project_detail.html',{'project':project, 'user':user, 'reviews':reviews, 'review_form':form})
 
 @login_required
 def rating(request,project_id):
