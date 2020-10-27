@@ -43,7 +43,7 @@ def rating(request,project_id):
   user = request.user
   project = get_object_or_404(Project, id=project_id)
   profile = Profile.objects.get(user=request.user)
-
+  rate = Rating.objects.get(id = project_id)
   if request.method == 'POST':
       form = RatingForm(request.POST)
       if form.is_valid():
@@ -54,7 +54,7 @@ def rating(request,project_id):
       return HttpResponseRedirect(reverse('rating', args=[project_id]))  
   else:
     form = RatingForm()
-  return render(request, 'rate.html',{'form':form,'user':user})  
+  return render(request, 'rate.html',{'form':form,'user':user,'rate':rate})  
     
     
     

@@ -2,7 +2,7 @@
 {%load bootstrap4%}
 
 {%block content%}
-<!-- <div class="container">
+<div class="container">
   <div class="row">
     <div class="col-md-4">
 
@@ -15,56 +15,30 @@
       </form>
 
     </div>
-  </div>
-</div> -->
 
-
-
-
-<!-- Button trigger modal-->
-
-<!-- Modal: modalAbandonedCart-->
-<div class="modal fade right" id="modalAbandonedCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-info" role="document">
-    <!--Content-->
-    <div class="modal-content">
-      <!--Header-->
-      <div class="modal-header">
-        <p class="heading">Rate this project
-        </p>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="white-text">&times;</span>
-        </button>
-      </div>
-
-      <!--Body-->
-      <div class="modal-body">
-
-        <div class="row">
-          <div class="col-3">
-            <p></p>
-            <p class="text-center"><i class="fas fa-shopping-cart fa-4x"></i></p>
-          </div>
-
-          <div class="col-9">
-            <form action="" method="POST" enctype="multipart/form-data">
-              {%csrf_token%}
+    <div class="col-md-6">
+      <h6>Rating</h6>
       
-              {%bootstrap_form form%}
-      
-              <button class="btn rgba-blue-grey-strong" >Post</button>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <!--Footer-->
+    <br>
+    
+    <div class="progress md-progress">
+      <h6>Design : {{rate.design}} </h6>
+        <div class="progress-bar bg-info" role="progressbar" style="" aria-valuenow="{{rate.design}}" aria-valuemin="0" aria-valuemax="10"></div>
     </div>
-    <!--/.Content-->
+    <br>
+    <div class="progress md-progress">
+      <h6>Usability: {{rate.usability}} </h6>
+        <div class="progress-bar bg-warning" role="progressbar" style="" aria-valuenow="{{rate.usability}}" aria-valuemin="0" aria-valuemax="10"></div>
+    </div>
+    <br>
+    <div class="progress md-progress">
+      <h6>Content: {{rate.content}}</h6>
+        <div class="progress-bar bg-danger" role="progressbar" style="" aria-valuenow="{{rate.content}}" aria-valuemin="0" aria-valuemax="10"></div>
+    </div>
+    </div>
   </div>
 </div>
-<!-- Modal: modalAbandonedCart-->
+
+
 
 {%endblock%}
