@@ -32,10 +32,12 @@
           <h4>Rate this Project</h4>
           <div class="media-body text-center text-md-left ml-md-3 ml-0">
             <h5 class="mt-0 font-weight-bold blue-text mb-3">{{review.user}}</h5>
-            <form method="POST" role="form" action="{% url 'review' project.id %}" enctype="multipart/form-data">
+            <form method="POST" role="form" action="{% url 'project_detail' project.id %}" enctype="multipart/form-data">
               {%csrf_token%}
-              <div>
-                <label for="comment">Review</label>
+              
+              {{form.as_p}}
+              <!-- <div> -->
+                <!-- <label for="comment">Review</label>
                 <textarea name="comment" id="comment" class="form-control" cols="30" rows="5"></textarea>
 
                 <label for="design">Design</label>
@@ -46,9 +48,9 @@
 
                 <label for="content">Content</label>
                 <input type="text" min="0" max="10" class="form-control" >
-        
+         -->
                 <button name="action" type="submit" class="btn btn-outline-default">Post</button>
-              </div>
+              <!-- </div> -->
             </form>
            
           </div>
@@ -64,13 +66,14 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-3">
-                  <h5 class="text-left">{{review.user.username}}</h5>
-                  <h5>Design:{{review.design}}</h5>
-                  <h5>Usability: {{review.usability}}</h5>
-                  <h5>Content:{{review.content}}</h5>
+                  <h5 class="text-left"> <strong>Name :</strong> {{review.user.username}}</h5>
+                  <h5>Design: {{average_design}}</h5>
+                  <h5>Usability: {{average_usability}}</h5>
+                  <h5>Content: {{average_content}}</h5>
                 </div>
 
                 <div class="col-md-9">
+                  <h3>Comment</h3>
                   <p>{{review.review}}</p>
                 </div>
               </div>

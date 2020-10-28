@@ -33,23 +33,6 @@ def project_detail(request,project_id):
   user = request.user
   project = get_object_or_404(Project, id=project_id)
   reviews = Review.objects.filter(project=project)
-  
-  # average_design = reviews.aggregate(Avg('design'))["design__avg"]
-  # average_usability = reviews.aggregate(Avg('usability'))["usability__avg"]
-  # average_content = reviews.aggregate(Avg('content'))["content__avg"]
-  # average_design = round(average_design, 2)
-  # average_usability = round(average_usability,2)
-  # average_content = round(average_content,2)
-
-  
-  return render (request, 'project_detail.html',{'project':project, 'user':user, 'reviews':reviews,})
-
-
-@login_required
-def new_review(request,project_id):
-  user = request.user
-  project = get_object_or_404(Project, id=project_id)
-  review = Review.objects.filter(project =project)
   if request.method == 'POST':
       form = ReviewForm(request.POST)
       if form.is_valid():
@@ -61,7 +44,35 @@ def new_review(request,project_id):
         return HttpResponseRedirect(reverse('project_detail', args=[project_id]))
   else:
     form = ReviewForm()
-  return render(request,'project_detail.html',{'form':ReviewForm, 'reviews':review,'project':project, 'user':user})  
+  
+  average_design = reviews.aggregate(Avg('design'))["design__avg"]
+  average_usability = reviews.aggregate(Avg('usability'))["usability__avg"]
+  average_content = reviews.aggregate(Avg('content'))["content__avg"]
+  average_design = round(average_design, 2)
+  average_usability = round(average_usability,2)
+  average_content = round(average_content,2)
+
+  
+  return render (request, 'project_detail.html',{'project':project, 'user':user, 'reviews':reviews,'form':ReviewForm,'average_design':average_design,'average_usability':average_usability,'average_content':average_content})
+
+
+# @login_required
+# def new_review(request,project_id):
+#   user = request.user
+#   project = get_object_or_404(Project, id=project_id)
+#   review = Review.objects.filter(project =project)
+#   if request.method == 'POST':
+#       form = ReviewForm(request.POST)
+#       if form.is_valid():
+#         reviews = form.save(commit=False)
+#         reviews.user= user
+#         reviews.project=project
+#         reviews.save()
+        
+#         return HttpResponseRedirect(reverse('project_detail', args=[project_id]))
+#   else:
+#     form = ReviewForm()
+#   return render(request,'project_detail.html',{'form':ReviewForm, 'reviews':review,'project':project, 'user':user})  
       
       
     
