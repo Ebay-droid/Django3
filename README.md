@@ -14,4 +14,5 @@ Also you can clone this repository to run the app on a local server.
 The application is created in the python language using the Django framework
 Also used in this project was MDBootstrap cdn for designing
 
-## Licence
+## Licence:
+https://raw.githubusercontent.com/Ebay-droid/Django3/master/LICENSE
