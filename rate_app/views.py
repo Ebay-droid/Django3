@@ -48,9 +48,9 @@ def project_detail(request,project_id):
   average_design = reviews.aggregate(Avg('design'))["design__avg"]
   average_usability = reviews.aggregate(Avg('usability'))["usability__avg"]
   average_content = reviews.aggregate(Avg('content'))["content__avg"]
-  average_design = round(average_design, 2)
-  average_usability = round(average_usability,2)
-  average_content = round(average_content,2)
+  # average_design = round(average_design, 2)
+  # average_usability = round(average_usability,2)
+  # average_content = round(average_content,2)
 
   
   return render (request, 'project_detail.html',{'project':project, 'user':user, 'reviews':reviews,'form':ReviewForm,'average_design':average_design,'average_usability':average_usability,'average_content':average_content})
