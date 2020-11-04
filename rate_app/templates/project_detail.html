@@ -26,8 +26,10 @@
           <a href="{{project.project_link}}"><h6 class="font-weight-bold indigo-text py-2">Project Link: {{project.project_link}}</h6></a> 
           <!-- Text -->
           <p class="card-text">Description: {{project.description}} </p>
-      
-
+            <h5>Average Ratings</h5>
+          <div class="badge badge-dark">Design: {{average_design}}</div>
+          <div class="badge badge-info">Usability: {{average_usability}}</div>
+          <div class="badge badge-primary">Content: {{average_content}}</div>
           <!-- review -->
           <h4>Rate this Project</h4>
           <div class="media-body text-center text-md-left ml-md-3 ml-0">
@@ -60,31 +62,34 @@
         </div>
       
       </div>
-      <div class="card">
+      <div class="">
+        
+      </div>
+    </div>
+    <div class="col-md-3">
+      <h3>All Reviews</h3>
         {% for review in reviews%}
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col-md-3">
+                <div class="">
                   <h5 class="text-left"> <strong>Name :</strong> {{review.user.username}}</h5>
-                  <h5>Design: {{average_design}}</h5>
-                  <h5>Usability: {{average_usability}}</h5>
-                  <h5>Content: {{average_content}}</h5>
+                  <small>Design: {{review.design}}</small>
+                  <small>Usability: {{review.usability}}</small>
+                  <small>Content: {{review.content}}</small>
                 </div>
 
-                <div class="col-md-9">
+                <div class="">
                   <h3>Comment</h3>
                   <p>{{review.review}}</p>
                 </div>
               </div>
             </div>
           </div>
-      
+      <br> Brand 
         
         {%endfor%}
-      </div>
     </div>
-    <div class="col-md-3"> </div>
   </div>
 </div>
 
