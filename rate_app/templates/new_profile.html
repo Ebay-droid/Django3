@@ -1,7 +1,10 @@
 {%include 'base.html'%}
 {%load bootstrap4%}
-
+{%load static%}
+{%block styles%}
 {%block content%}
+<div class="card" id= "card1">
+
   <form action="" method ="POST" enctype="multipart/form-data">
 
     {%csrf_token%}
@@ -16,13 +19,16 @@
           </div>
           
         </div>
+        <div class="col-md-6">
+          <img src="../../static/images/alexander-kaunas-1r-085jyT1o-unsplash.jpg" class="img-fluid" alt="Responsive image">
+        </div>
       </div>
+      
     </div>
-    
-    
-
-
   </form>
+
+</div>
+
 <!-- 
   <div class="container">
     <div class="row">
