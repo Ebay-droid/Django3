@@ -56,23 +56,6 @@ def project_detail(request,project_id):
   return render (request, 'project_detail.html',{'project':project, 'user':user, 'reviews':reviews,'form':ReviewForm,'average_design':average_design,'average_usability':average_usability,'average_content':average_content})
 
 
-# @login_required
-# def new_review(request,project_id):
-#   user = request.user
-#   project = get_object_or_404(Project, id=project_id)
-#   review = Review.objects.filter(project =project)
-#   if request.method == 'POST':
-#       form = ReviewForm(request.POST)
-#       if form.is_valid():
-#         reviews = form.save(commit=False)
-#         reviews.user= user
-#         reviews.project=project
-#         reviews.save()
-        
-#         return HttpResponseRedirect(reverse('project_detail', args=[project_id]))
-#   else:
-#     form = ReviewForm()
-#   return render(request,'project_detail.html',{'form':ReviewForm, 'reviews':review,'project':project, 'user':user})  
       
       
     
